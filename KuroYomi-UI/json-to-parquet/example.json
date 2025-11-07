@@ -1,0 +1,28 @@
+[
+    "マンシングウエア",
+    "マンシングウエア",
+    "n product",
+    "",
+    -200,
+    [{
+        "content":
+        {
+            "content": {
+                "content":"Munsingwear",
+                "tag":"li"
+            },
+            "data": {
+                "content":"glossary"
+            },
+            "lang":"en",
+            "style": {
+                "listStyleType":"circle"
+            },
+            "tag":"ul"
+        },
+            "type":"structured-content"
+        }
+    ],
+    5741143,
+    ""
+]
