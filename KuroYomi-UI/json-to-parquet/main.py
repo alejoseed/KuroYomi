@@ -35,35 +35,62 @@ def convert_json_to_dict(json_path : Path) -> list[list[str]]:
     json_obj : list[list[str]] = json.loads(json_str)
 
 
-    def dfs(node):
+    def dfs(node) -> list[str] | str:
         if not node:
-            return
-        
-    dtypes = set()
+            return ""
 
-    for item in json_obj:
+        if isinstance(node, str):
+            return node
+        
+        if isinstance(node, list):
+            definitions = []
+
+            for item in node:
+                ret = dfs(item)
+                definitions.append(ret)
+            return definitions
+        
+        if isinstance(node, dict):
+            content = node.get("content")
+            if content:
+                return dfs(content)
+            return ""
+        
+        return ""
+    
+
+    def flatten(item):
+        if isinstance(item, str):
+            return [item]
+        if isinstance(item, list):
+            result = []
+            for i in item:
+                result.extend(flatten(i))
+            return result
+        return []
+
+    for i, item in enumerate(json_obj.copy()):
+        if not item[1]:
+            continue
         for definition in item[5]:
             if isinstance(definition, str): # This will not happen in the Jintendex case.
                 print(definition)
             if isinstance(definition, dict):
                 dtype = definition.get("type")
-                dtypes.add(dtype)      
-                print("THIS IS A DICT. RECURSIVE FLATTENING")
+                
+                if dtype == "structured-content":
+                    nodes = definition.get("content") or []
+
+                    for node in nodes:
+                        definition_list = dfs(node)
+                        flattened_dl = flatten(definition_list)
+                        json_obj[i].append(flattened_dl)
+                    continue
+
             if isinstance(definition, list):
                 print("THIS IS A LIST")
-    # dict_entries : list[DictEntry] = []   
-    
-    # for item in json_obj:
-    #     tmp : DictEntry = DictEntry()
-    #     tmp.term = item[0]
-    #     tmp.reading = item[1]
-    #     tmp.tags = item[2]
-    #     tmp.deflection = item[3]
-    #     tmp.score = int(item[4])
-    #     dict_entries.append(tmp)
-        
-        
-
+            else:
+                print("CASE NOT MADE")
     # all_possible_tags = set()
 
     # dfs_obj = {}
