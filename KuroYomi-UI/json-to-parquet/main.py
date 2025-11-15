@@ -1,30 +1,55 @@
 import polars as pl
 import json
-import time
+import sqlite3
 from pathlib import Path
 
 term_bank_schema = {
-    "column_0": pl.String,   # term
-    "column_1": pl.String,   # reading
-    "column_2": pl.String,   # definition tags
-    "column_3": pl.String,   # rule ids
-    "column_4": pl.Float64,  # score
-    "column_5": pl.List,
-    "column_6": pl.Int64,    # sequence
-    "column_7": pl.String,   # term tags
+    "term": pl.String,                        # term
+    "reading": pl.String,                     # reading
+    "tags": pl.String,                        # definition tags
+    "deflection": pl.String,                  # rule ids
+    "score": pl.Float64,                      # score
+    "definition_list": pl.List(pl.String),    # normalized definitions
+    "sequence": pl.Int64,                     # Sequence
+    "str_tags": pl.String,                    # term tags
 }
 
-class DictEntry:
-    term : str = ""
-    reading: str = ""
-    tags : str = ""
-    deflection : str = ""
-    score : int = 0
-    definition : object = None
+"""
+Consider this example yomitan dict 
+test = 
+    [
+        [
+            "マンシングウエア",
+            "マンシングウエア",
+            "n product",
+            "",
+            -200,
+            [ Notice how the only definition that was valid was hidden being a li 
+                {
+                    "content": {
+                        "content": {
+                            "content": "Munsingwear",
+                            "tag": "li"
+                        },
+                        "data": {
+                            "content": "glossary"
+                        },
+                        "lang": "en",
+                        "style": {
+                            "listStyleType": "circle"
+                        },
+                        "tag": "ul"
+                    },
+                    "type": "structured-content"
+                }
+            ],
+            5741143,
+            ""
+        ]
+    ] 
+"""
 
-    def __init__(self) -> None:
-        pass
-def convert_json_to_dict(json_path : Path) -> list[list[str]]:
+def convert_json_to_list(json_path : Path) -> list[list[str | list[str] | int]]:
     def get_json_as_str(json_path: Path):
         with open(json_path) as f:
             json_str = f.readline()
@@ -32,119 +57,81 @@ def convert_json_to_dict(json_path : Path) -> list[list[str]]:
 
     json_str = get_json_as_str(json_path)
     
-    json_obj : list[list[str]] = json.loads(json_str)
-
-
-    def dfs(node) -> list[str] | str:
-        if not node:
-            return ""
-
-        if isinstance(node, str):
-            return node
-        
-        if isinstance(node, list):
-            definitions = []
-
-            for item in node:
-                ret = dfs(item)
-                definitions.append(ret)
-            return definitions
-        
-        if isinstance(node, dict):
-            content = node.get("content")
-            if content:
-                return dfs(content)
-            return ""
-        
-        return ""
+    json_obj : list[list[str | list[str] | int]] = json.loads(json_str)
     
-
-    def flatten(item):
-        if isinstance(item, str):
-            return [item]
-        if isinstance(item, list):
-            result = []
-            for i in item:
-                result.extend(flatten(i))
-            return result
-        return []
-
-    for i, item in enumerate(json_obj.copy()):
-        if not item[1]:
-            continue
-        for definition in item[5]:
-            if isinstance(definition, str): # This will not happen in the Jintendex case.
-                print(definition)
-            if isinstance(definition, dict):
-                dtype = definition.get("type")
-                
-                if dtype == "structured-content":
-                    nodes = definition.get("content") or []
-
-                    for node in nodes:
-                        definition_list = dfs(node)
-                        flattened_dl = flatten(definition_list)
-                        json_obj[i].append(flattened_dl)
+    def extract_definitions(structured_content) -> list[str]:
+        definitions = []
+        
+        stack = [structured_content]
+        
+        while stack:
+            node = stack.pop()
+            
+            if isinstance(node, dict):
+                if node.get('data', {}).get('content') == 'glossary':
+                    content = node.get('content', [])
+                    if isinstance(content, list):
+                        for item in content:
+                            if isinstance(item, dict) and item.get('tag') == 'li':
+                                text = item.get('content')
+                                if isinstance(text, str):
+                                    definitions.append(text)
+                    elif isinstance(content, dict) and content.get('tag') == 'li':
+                        text = content.get('content')
+                        if isinstance(text, str):
+                            definitions.append(text)
                     continue
+                
+                for value in node.values():
+                    stack.append(value)
+                    
+            elif isinstance(node, list):
+                stack.extend(node)
+        
+        return definitions
 
-            if isinstance(definition, list):
-                print("THIS IS A LIST")
-            else:
-                print("CASE NOT MADE")
-    # all_possible_tags = set()
+    
+    definition_index = 5
 
-    # dfs_obj = {}
-
-    # for i, item in enumerate(json_obj):
-    #     all_tags = item[2].split(" ")
-    #     all_possible_tags.update(all_tags)
+    for i, item in enumerate(json_obj):
+        definition = extract_definitions(item[definition_index])        
+        json_obj[i][definition_index] = definition
 
     return json_obj
 
-def normalize_yomitan_json() -> str:
-    test = """
-        [
-            [
-                "マンシングウエア",
-                "マンシングウエア",
-                "n product",
-                "",
-                -200,
-                [
-                    {
-                        "content": {
-                            "content": {
-                                "content": "Munsingwear",
-                                "tag": "li"
-                            },
-                            "data": {
-                                "content": "glossary"
-                            },
-                            "lang": "en",
-                            "style": {
-                                "listStyleType": "circle"
-                            },
-                            "tag": "ul"
-                        },
-                        "type": "structured-content"
-                    }
-                ],
-                5741143,
-                ""
-            ]
-        ]
-    """
+def djb2(s : str) -> int:
+    hash = 5381
 
-    att = json.loads(test)
+    for c in s:
+        hash  = ((hash << 5) + hash) + ord(c)
+    return hash & 0xFFFFFFFFFFFFFFFF # u64
 
-    print(att)
-    return test
+
 def main():
-    # test_json_path = Path(f"/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to-parquet/new_term_bank_212.jsonl")
-    for i in range(1, 212):
-        test_json_path = Path(f"/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to-parquet/Jintendex/term_bank_{i}.json")
-        term_bank_52 = convert_json_to_dict(test_json_path)
-        break
+    test_json_path = Path(f"/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to-parquet/new_term_bank_212.jsonl")
+
+    jintendex = pl.read_parquet("/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to-parquet/Jintendex_parquets/term_bank_*.parquet")
+    
+    df = jintendex.with_columns(
+        col_to_hash = (
+            pl.concat_str(
+                pl.col("term"),
+                pl.col("reading"),
+                pl.col("tags"),
+                pl.col("deflection"),
+                pl.col("score").cast(pl.String),
+                pl.col("definition_list").list.join(""),
+                pl.col("sequence").cast(pl.String),
+                pl.col("str_tags")
+            )
+        )
+    )
+
+    df = df.with_columns(
+        pl.col("col_to_hash").map_elements(djb2, return_dtype=pl.UInt64).alias("hash")
+    )
+
+    print(df)
     # print(term_bank_52)
 
 if __name__ == "__main__":

@@ -1,2 +1,5 @@
 JMDict
 uv.lock
+*.parquet
+Jintendex_parquets
+Jintendex
