@@ -9,7 +9,11 @@
             "type": "debugpy",
             "request": "launch",
             "program": "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to-parquet/main.py",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "args": [
+                "--dict_folder",
+                "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to-parquet/Jintendex"
+            ]
         }
     ]
 }
