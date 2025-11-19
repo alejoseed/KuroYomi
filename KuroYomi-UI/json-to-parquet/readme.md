@@ -11,6 +11,7 @@ CREATE TABLE Dictionaries (
 
 CREATE UNIQUE INDEX idx_dict_unique ON Dictionaries(title, author, revision);
 
+
 -- Terms definition
 
 CREATE TABLE Terms (
@@ -19,16 +20,20 @@ CREATE TABLE Terms (
     reading TEXT NOT NULL,
     dictionary_id INTEGER NOT NULL,
     score INTEGER,
-    sequence INTEGER,
+    sequence INTEGER, tags TEXT, deflection TEXT, term_tags TEXT, hash TEXT,
     FOREIGN KEY (dictionary_id) REFERENCES Dictionaries(id),
-    UNIQUE(term, reading, dictionary_id)
+    UNIQUE(id, hash)
 );
 
+CREATE UNIQUE INDEX Terms_hash_IDX ON Terms (hash);
+
+
 -- Definitions definition
+
 CREATE TABLE Definitions (
-    id INTEGER PRIMARY KEY,
-    term_id INTEGER NOT NULL,
-    definition TEXT NOT NULL,
-    sense_order INTEGER,
-    FOREIGN KEY (term_id) REFERENCES Terms(id) ON DELETE CASCADE
+	id INTEGER,
+	definition TEXT NOT NULL,
+	term_hash TEXT NOT NULL,
+	CONSTRAINT DEFINITIONS_PK PRIMARY KEY (id),
+	CONSTRAINT Definitions_Terms_FK FOREIGN KEY (term_hash) REFERENCES Terms(hash)
 );
