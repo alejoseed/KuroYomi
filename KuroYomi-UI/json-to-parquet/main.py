@@ -233,8 +233,11 @@ def process_term_banks(term_bank_list : list[Path], dict_id : int) -> bool:
         with open(term_bank, "r") as f:
             json_file = json.load(f)
             
-            _ = insert_single_term_bank(json_file=json_file, dict_id=dict_id)
-            return True
+            try:
+                _ = insert_single_term_bank(json_file=json_file, dict_id=dict_id)
+            except Exception as e:
+                print(f"There was an error insertion batch {term_bank}")
+                print(e)
     return False
 
 def insert_single_term_bank(json_file: list[dict], dict_id: int):
