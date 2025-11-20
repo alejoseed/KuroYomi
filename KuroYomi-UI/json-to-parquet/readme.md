@@ -1,6 +1,5 @@
 Current schema for the sqlite db
 
-
 -- Dictionaries definition
 
 CREATE TABLE Dictionaries (
@@ -26,6 +25,7 @@ CREATE TABLE Terms (
 );
 
 CREATE UNIQUE INDEX Terms_hash_IDX ON Terms (hash);
+CREATE INDEX idx_terms_term ON Terms(term);
 
 
 -- Definitions definition
@@ -37,3 +37,5 @@ CREATE TABLE Definitions (
 	CONSTRAINT DEFINITIONS_PK PRIMARY KEY (id),
 	CONSTRAINT Definitions_Terms_FK FOREIGN KEY (term_hash) REFERENCES Terms(hash)
 );
+
+CREATE INDEX idx_definitions_term_hash ON Definitions(term_hash);
