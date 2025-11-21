@@ -1,6 +1,6 @@
 // use polars::prelude::*;
-use std::io::{self, BufRead};
 use rusqlite::{Connection, Result};
+use std::io::{self, BufRead};
 
 #[derive(Debug)]
 struct Definitions {
@@ -34,10 +34,10 @@ struct TermAndDefinition {
 
 fn find_in_dict(word: &str) -> Result<()> {
     let conn = Connection::open(
-        "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to-parquet/KuroYomi.sqlite"
+        "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to-parquet/KuroYomi.sqlite",
     )?;
-    
-    let query = "select * from Terms t left join Definitions d on d.term_hash = t.hash where term = ?1";
+
+    let query = "select * from Terms t left join Definitions d on d.term_hash = t.hash where term = ?1 or reading = ?1";
 
     let mut stmt = conn.prepare(query)?;
     let rows = stmt.query_map([word], |row| {
@@ -46,7 +46,7 @@ fn find_in_dict(word: &str) -> Result<()> {
             reading: row.get("reading")?,
             score: row.get("score")?,
             tags: row.get("tags")?,
-            definition: row.get("definition")?
+            definition: row.get("definition")?,
         })
     })?;
 
@@ -63,7 +63,7 @@ fn find_in_dict(word: &str) -> Result<()> {
 fn main() {
     let stdin = io::stdin();
     let mut handle = stdin.lock();
-    
+
     loop {
         let mut line = String::new();
 

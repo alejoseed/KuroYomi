@@ -3,4 +3,5 @@ term_bank_*.json
 *.zip
 tag_bank_*.json
 KuroYomi-UI/json-to-parquet/Jintendex.sqlite
-*.sqlite
+KuroYomi-UI/json-to-parquet/KuroYomi.sqlite
+KuroYomi-UI/json-to-parquet/KuroYomi.sqlite
