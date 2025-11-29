@@ -154,13 +154,14 @@ fn get_dictionary_id(dictionary_metadata: &DictionaryIndexFile) -> Result<i64, r
     return Ok(dict_id);
 }
 
-fn process_term_bank_list(term_bank_list: &Vec<String>, dict_id: &i64) {
+fn process_term_bank_list(term_bank_list: &Vec<String>, dict_id: &i64) -> io::Result<()> {
     for term_bank in term_bank_list {
         let term_bank_file = fs::File::open(term_bank)?;
         let reader = io::BufReader::new(term_bank_file);
 
         // let 
     }
+    return Ok(())
 }
 
 // fn insert_term_bank() {
