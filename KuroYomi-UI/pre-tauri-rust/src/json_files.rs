@@ -72,9 +72,10 @@ pub fn init_dict(path: &Path) -> io::Result<()> {
     }
 
     let dictionary_metadata = get_dictionary_metadata(&dictionary.index_file)?;
-    
-    let dict_entry_result = insert_dictionary_db(dictionary_metadata);
 
+    let dict_entry_result: Result<i64, rusqlite::Error> = insert_dictionary_db(&dictionary_metadata);
+        
+    println!("Dictionary id: {dict_entry_result:?}");
     Ok(())
 }
 
@@ -119,16 +120,50 @@ fn get_dictionary_metadata(dictionary_index: &String) -> io::Result<DictionaryIn
     return Ok(dictionary_index);
 }
 
-fn insert_dictionary_db(dictionary_metadata: DictionaryIndexFile) -> Result<bool> {
+fn insert_dictionary_db(dictionary_metadata: &DictionaryIndexFile) -> Result<i64, rusqlite::Error> {
     let conn = Connection::open(
         SQLITE_PATH
-    );
+    )?;
     
-    let query= "insert into Dictionary (id, title, revision, auther) values (1?, 2?, 3?, 4?)";
-    return Ok(false);
+    let query= "insert into Dictionaries (title, revision, author) values (?1, ?2, ?3) 
+    on conflict (title, revision, author) do nothing";
+
+    conn.execute(query, (&dictionary_metadata.title, &dictionary_metadata.revision, &dictionary_metadata.author))?;
+    
+    let mut dictionary_id = conn.last_insert_rowid();
+
+    if dictionary_id == 0 {
+        dictionary_id = get_dictionary_id(&dictionary_metadata)?;
+    }
+    
+    return Ok(dictionary_id);
 }
 
+fn get_dictionary_id(dictionary_metadata: &DictionaryIndexFile) -> Result<i64, rusqlite::Error> {
+    let conn = Connection::open(
+        SQLITE_PATH
+    )?;
+    
+    let query= "select id from Dictionaries where title = ?1 and author = ?2 and revision = ?3";
+    let dict_id = conn.query_row
+        (
+        query, 
+        (&dictionary_metadata.title, &dictionary_metadata.author, &dictionary_metadata.revision), 
+        |row| row.get(0))?;
+    
+    return Ok(dict_id);
+}
 
+fn process_term_bank_list(term_bank_list: &Vec<String>, dict_id: &i64) {
+    for term_bank in term_bank_list {
+        let term_bank_file = fs::File::open(term_bank)?;
+        let reader = io::BufReader::new(term_bank_file);
 
+        // let 
+    }
+}
 
+// fn insert_term_bank() {
+
+// }
 

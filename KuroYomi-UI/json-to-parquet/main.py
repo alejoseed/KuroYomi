@@ -288,27 +288,33 @@ def insert_single_term_bank(json_file: list[dict], dict_id: int):
 
 def main():
     try:
-        list_dict_metadata: list[DictionaryMetadata] = [
-            metadata
-            for dict_path in dict_paths
-            if (metadata := get_dictionary_metadata(dict_path)) is not None
-        ]
-
-        for i, metadata in enumerate(list_dict_metadata):
-            dict_id = create_dictionary(metadata=metadata, sqlite_path="/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to-parquet/KuroYomi.sqlite")
-            if not dict_id:
-                print(f"Dictionary not created for {metadata.title}")
-            list_dict_metadata[i].dict_id = dict_id
-        
-        for metadata in list_dict_metadata:
-            term_bank_files = [metadata.local_path / x for x in os.listdir(metadata.local_path) if "term_bank" in x]
-            _ = process_term_banks(term_bank_files, metadata.dict_id)
-            _ = json_files_to_df(metadata.local_path)
-            
-        return 0
+        print("Junny es muy bonita")
+        raise Exception("Exceso de bonita")
     except Exception as e:
-        print(e)
-        return
+        print(f"Oh oh error {e}")
+        
+    # try:
+    #     list_dict_metadata: list[DictionaryMetadata] = [
+    #         metadata
+    #         for dict_path in dict_paths
+    #         if (metadata := get_dictionary_metadata(dict_path)) is not None
+    #     ]
+
+    #     for i, metadata in enumerate(list_dict_metadata):
+    #         dict_id = create_dictionary(metadata=metadata, sqlite_path="/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to-parquet/KuroYomi.sqlite")
+    #         if not dict_id:
+    #             print(f"Dictionary not created for {metadata.title}")
+    #         list_dict_metadata[i].dict_id = dict_id
+        
+    #     for metadata in list_dict_metadata:
+    #         term_bank_files = [metadata.local_path / x for x in os.listdir(metadata.local_path) if "term_bank" in x]
+    #         _ = process_term_banks(term_bank_files, metadata.dict_id)
+    #         _ = json_files_to_df(metadata.local_path)
+            
+    #     return 0
+    # except Exception as e:
+    #     print(e)
+    #     return
 
     # jintendex = pl.read_parquet("/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to-parquet/Jintendex_parquets/term_bank_*.parquet")
     
