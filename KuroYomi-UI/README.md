@@ -1,7 +1,13 @@
-# Tauri + SvelteKit + TypeScript
+# KuroYomi UI
 
-This template should help get you started developing with Tauri, SvelteKit and TypeScript in Vite.
+This repo now focuses on a native Rust dictionary window built with `iced`.
 
-## Recommended IDE Setup
+## Native dictionary window
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer).
+- Ensure the SQLite database exists at `json-to-parquet/KuroYomi.sqlite` (or set `KUROYOMI_DB_PATH` to another path).
+- Run `cargo run` from `pre-tauri-rust`.
+
+## Frontend (optional)
+
+- `npm install`
+- `npm run dev`

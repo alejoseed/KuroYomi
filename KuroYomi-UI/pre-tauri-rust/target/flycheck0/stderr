@@ -1,18 +1,93 @@
-   0.055110653s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre_tauri_rust"}: cargo::core::compiler::fingerprint: stale: changed "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/json_files.rs"
-   0.055127983s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre_tauri_rust"}: cargo::core::compiler::fingerprint:           (vs) "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/target/debug/.fingerprint/pre-tauri-rust-da33280bcdffb15d/dep-lib-pre_tauri_rust"
-   0.055131563s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre_tauri_rust"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1764292646, nanos: 310853520 } < FileTime { seconds: 1764293245, nanos: 450274973 }
-   0.055174653s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre_tauri_rust"}: cargo::core::compiler::fingerprint: fingerprint dirty for pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust)/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("pre_tauri_rust", ["lib"], "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/lib.rs", Edition2024) }
-   0.055183523s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre_tauri_rust"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/target/debug/.fingerprint/pre-tauri-rust-da33280bcdffb15d/dep-lib-pre_tauri_rust", reference_mtime: FileTime { seconds: 1764292646, nanos: 310853520 }, stale: "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/json_files.rs", stale_mtime: FileTime { seconds: 1764293245, nanos: 450274973 } }))
-   0.056342504s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre_tauri_rust"}: cargo::core::compiler::fingerprint: stale: changed "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/json_files.rs"
-   0.056347684s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre_tauri_rust"}: cargo::core::compiler::fingerprint:           (vs) "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/target/debug/.fingerprint/pre-tauri-rust-d9f13cb304bef776/dep-test-lib-pre_tauri_rust"
-   0.056350564s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre_tauri_rust"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1764292646, nanos: 310853520 } < FileTime { seconds: 1764293245, nanos: 450274973 }
-   0.056372324s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre_tauri_rust"}: cargo::core::compiler::fingerprint: fingerprint dirty for pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust)/Check { test: true }/TargetInner { name_inferred: true, ..: lib_target("pre_tauri_rust", ["lib"], "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/lib.rs", Edition2024) }
-   0.056382574s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre_tauri_rust"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/target/debug/.fingerprint/pre-tauri-rust-d9f13cb304bef776/dep-test-lib-pre_tauri_rust", reference_mtime: FileTime { seconds: 1764292646, nanos: 310853520 }, stale: "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/json_files.rs", stale_mtime: FileTime { seconds: 1764293245, nanos: 450274973 } }))
-   0.056599334s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre-tauri-rust"}: cargo::core::compiler::fingerprint: fingerprint dirty for pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust)/Check { test: false }/TargetInner { name: "pre-tauri-rust", doc: true, ..: with_path("/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/main.rs", Edition2024) }
-   0.056608404s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre-tauri-rust"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleDepFingerprint { name: "pre_tauri_rust" })
-   0.056798884s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre-tauri-rust"}: cargo::core::compiler::fingerprint: fingerprint dirty for pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust)/Check { test: true }/TargetInner { name: "pre-tauri-rust", doc: true, ..: with_path("/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/main.rs", Edition2024) }
-   0.056808784s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre-tauri-rust"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleDepFingerprint { name: "pre_tauri_rust" })
+   0.131577265s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre_tauri_rust"}: cargo::core::compiler::fingerprint: fingerprint error for pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust)/Check { test: true }/TargetInner { name_inferred: true, ..: lib_target("pre_tauri_rust", ["lib"], "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/lib.rs", Edition2024) }
+   0.131598285s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre_tauri_rust"}: cargo::core::compiler::fingerprint:     err: failed to read `/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/target/debug/.fingerprint/pre-tauri-rust-fca098b171ca8e51/test-lib-pre_tauri_rust`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: cargo_util::paths::read_bytes
+   1: cargo_util::paths::read
+   2: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   3: cargo::core::compiler::fingerprint::prepare_target
+   4: cargo::core::compiler::compile
+   5: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   6: cargo::ops::cargo_compile::compile_ws
+   7: cargo::ops::cargo_compile::compile_with_exec
+   8: cargo::ops::cargo_compile::compile
+   9: cargo::commands::check::exec
+  10: <cargo::cli::Exec>::exec
+  11: cargo::main
+  12: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  13: std::rt::lang_start::<()>::{closure#0}
+  14: core::ops::function::impls::<impl core::ops::function::FnOnce<A> for &F>::call_once
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/core/src/ops/function.rs:287:21
+  15: std::panicking::catch_unwind::do_call
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:590:40
+  16: std::panicking::catch_unwind
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:553:19
+  17: std::panic::catch_unwind
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panic.rs:359:14
+  18: std::rt::lang_start_internal::{{closure}}
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/rt.rs:175:24
+  19: std::panicking::catch_unwind::do_call
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:590:40
+  20: std::panicking::catch_unwind
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:553:19
+  21: std::panic::catch_unwind
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panic.rs:359:14
+  22: std::rt::lang_start_internal
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/rt.rs:171:5
+  23: main
+  24: <unknown>
+  25: __libc_start_main
+  26: <unknown>
+   0.136632107s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre-tauri-rust"}: cargo::core::compiler::fingerprint: stale: changed "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/main.rs"
+   0.136639167s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre-tauri-rust"}: cargo::core::compiler::fingerprint:           (vs) "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/target/debug/.fingerprint/pre-tauri-rust-3c3192fa99b7fff8/dep-bin-pre-tauri-rust"
+   0.136642057s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre-tauri-rust"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1768261607, nanos: 165850091 } < FileTime { seconds: 1768261619, nanos: 522850027 }
+   0.136675537s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre-tauri-rust"}: cargo::core::compiler::fingerprint: fingerprint dirty for pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust)/Check { test: false }/TargetInner { name: "pre-tauri-rust", doc: true, ..: with_path("/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/main.rs", Edition2024) }
+   0.136683437s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre-tauri-rust"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/target/debug/.fingerprint/pre-tauri-rust-3c3192fa99b7fff8/dep-bin-pre-tauri-rust", reference_mtime: FileTime { seconds: 1768261607, nanos: 165850091 }, stale: "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/main.rs", stale_mtime: FileTime { seconds: 1768261619, nanos: 522850027 } }))
+   0.137461268s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre-tauri-rust"}: cargo::core::compiler::fingerprint: fingerprint error for pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust)/Check { test: true }/TargetInner { name: "pre-tauri-rust", doc: true, ..: with_path("/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/src/main.rs", Edition2024) }
+   0.137472228s  INFO prepare_target{force=false package_id=pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust) target="pre-tauri-rust"}: cargo::core::compiler::fingerprint:     err: failed to read `/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust/target/debug/.fingerprint/pre-tauri-rust-f3ec33b1b0071a0d/test-bin-pre-tauri-rust`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: cargo_util::paths::read_bytes
+   1: cargo_util::paths::read
+   2: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   3: cargo::core::compiler::fingerprint::prepare_target
+   4: cargo::core::compiler::compile
+   5: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   6: cargo::ops::cargo_compile::compile_ws
+   7: cargo::ops::cargo_compile::compile_with_exec
+   8: cargo::ops::cargo_compile::compile
+   9: cargo::commands::check::exec
+  10: <cargo::cli::Exec>::exec
+  11: cargo::main
+  12: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  13: std::rt::lang_start::<()>::{closure#0}
+  14: core::ops::function::impls::<impl core::ops::function::FnOnce<A> for &F>::call_once
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/core/src/ops/function.rs:287:21
+  15: std::panicking::catch_unwind::do_call
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:590:40
+  16: std::panicking::catch_unwind
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:553:19
+  17: std::panic::catch_unwind
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panic.rs:359:14
+  18: std::rt::lang_start_internal::{{closure}}
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/rt.rs:175:24
+  19: std::panicking::catch_unwind::do_call
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:590:40
+  20: std::panicking::catch_unwind
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panicking.rs:553:19
+  21: std::panic::catch_unwind
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/panic.rs:359:14
+  22: std::rt::lang_start_internal
+             at /rustc/ed61e7d7e242494fb7057f2657300d9e77bb4fcb/library/std/src/rt.rs:171:5
+  23: main
+  24: <unknown>
+  25: __libc_start_main
+  26: <unknown>
     Checking pre-tauri-rust v0.1.0 (/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/pre-tauri-rust)
-error: could not compile `pre-tauri-rust` (lib test) due to 1 previous error; 1 warning emitted
-warning: build failed, waiting for other jobs to finish...
-error: could not compile `pre-tauri-rust` (lib) due to 1 previous error; 1 warning emitted
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s

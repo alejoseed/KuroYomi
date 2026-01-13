@@ -2,7 +2,9 @@ use std::fs;
 use std::io;
 use std::path::Path;
 use rusqlite::Connection;
-use serde::Deserialize;
+
+use crate::json_file_models::DictionaryIndexFile;
+use crate::json_file_models::TermBankFile;
 
 const SQLITE_PATH: &str = "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to-parquet/KuroYomi.sqlite";
 
@@ -10,33 +12,6 @@ const SQLITE_PATH: &str = "/home/alejoseed/Projects/KuroYomi/KuroYomi-UI/json-to
 struct DictionaryFolder {
     index_file: String,
     term_bank_files: Vec<String>,
-}
-
-#[derive(Debug, Deserialize)]
-struct DictionaryIndexFile {
-    pub title: String,
-    pub author: String,
-    pub sequenced: bool,
-    pub format: u32,
-    pub url: String,
-    pub description: String,
-    pub attribution: String,
-    pub revision: String,
-
-    #[serde(rename = "isUpdatable")]
-    pub is_updatable: bool,
-
-    #[serde(rename = "indexUrl")]
-    pub index_url: String,
-
-    #[serde(rename = "downloadUrl")]
-    pub download_url: String,
-    
-    #[serde(rename = "sourceLanguage")]
-    pub source_language: String,
-
-    #[serde(rename = "targetLanguage")]
-    pub target_language: String,
 }
 
 
@@ -74,8 +49,15 @@ pub fn init_dict(path: &Path) -> io::Result<()> {
     let dictionary_metadata = get_dictionary_metadata(&dictionary.index_file)?;
 
     let dict_entry_result: Result<i64, rusqlite::Error> = insert_dictionary_db(&dictionary_metadata);
-        
-    println!("Dictionary id: {dict_entry_result:?}");
+    let dict_id = dict_entry_result.map_err(|err| {
+        io::Error::new(
+            io::ErrorKind::Other,
+            format!("Failed to insert dictionary: {err}"),
+        )
+    })?;
+
+    // let term_bank_item = process_term_bank_list(&dictionary.term_bank_files, &dict_id);
+    println!("Dictionary id: {dict_id}");
     Ok(())
 }
 
@@ -158,6 +140,16 @@ fn process_term_bank_list(term_bank_list: &Vec<String>, dict_id: &i64) -> io::Re
     for term_bank in term_bank_list {
         let term_bank_file = fs::File::open(term_bank)?;
         let reader = io::BufReader::new(term_bank_file);
+
+        println!("Reading term_bank file: {term_bank}");
+        
+        let _term_bank: TermBankFile = serde_json::from_reader(reader)
+        .map_err(|e: serde_json::Error| {
+            io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("JSON parsing failed while reading term_bank {}", e)
+            )
+        }).inspect_err(|e| println!("There was an error while mapping errors {e}"))?;
 
         // let 
     }

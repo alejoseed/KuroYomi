@@ -33,3 +33,5 @@ pub struct DictSearchResult {
     pub tags: String,
     pub definition: String,
 }
+
+
